@@ -1,9 +1,10 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: [
-      '~/assets/css/normalize.scss',
-      '~/assets/css/fonts.scss',
-      '~/assets/css/main.scss'
+      '~/assets/scss/normalize.scss',
+      '~/assets/scss/fonts.scss',
+      `~/assets/scss/variables.scss`,
+      '~/assets/scss/main.scss'
   ],
     app: {
         head: {
