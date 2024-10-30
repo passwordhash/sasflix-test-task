@@ -12,8 +12,28 @@ export type Post = {
 
 }
 
-export type GetPostsResp = {
+export type Comment = {
+    id: number
+    body: string
+    postId: number
+    userId: {
+        id: number
+        username: string
+        fullname: string
+    }
+}
+
+export type PostResp = Post
+
+export type PostsResp = {
     posts: Post[]
+    total: number
+    skip: number
+    limit: number
+}
+
+export type CommentsResp = {
+    comments: Comment[]
     total: number
     skip: number
     limit: number

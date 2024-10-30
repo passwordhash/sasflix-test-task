@@ -24,7 +24,9 @@ const { post } = defineProps<{post: Post}>()
                     <span class="reaction__value">{{ post.reactions.dislikes }}</span>
                 </div>
             </div>
-            <div class="post-card__open">Open comments</div>
+            <div class="post-card__open">
+                <NuxtLink :to="`/posts/${post.id}`">Open post</NuxtLink>
+            </div>
             <div class="post-card__date">Today</div>
             <div class="post-card__tags">
                 <PostTag
@@ -72,18 +74,20 @@ const { post } = defineProps<{post: Post}>()
         cursor: pointer;
     }
     &__open {
-        color: $accent-color;
-        cursor: pointer;
-        position: relative;
-        &:after {
-            content: "";
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 0.5px;
-            background-color: $accent-border-color;
-            transform: scaleY(0.5);
+        a {
+            color: $accent-color;
+            cursor: pointer;
+            position: relative;
+            &:after {
+                content: "";
+                position: absolute;
+                bottom: -1px;
+                left: 0;
+                width: 100%;
+                height: 0.5px;
+                background-color: $accent-border-color;
+                transform: scaleY(0.5);
+            }
         }
     }
     &__date {
