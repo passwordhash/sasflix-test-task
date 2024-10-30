@@ -12,7 +12,7 @@ const { data: resp } = await useFetch<GetPostsResp>(uri)
 
 <template>
     <div class="main__container container">
-        <div v-if="resp" v-for="p in resp.posts">
+        <div v-if="resp" v-for="p in resp.posts.slice(0, 5)">
             <PostCard :post="p"/>
         </div>
     </div>
