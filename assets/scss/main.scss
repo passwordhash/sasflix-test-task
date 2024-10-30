@@ -11,15 +11,36 @@
     margin: 0 auto;
     padding: 0 15px;
 }
+.accent-link {
+    &, a {
+        display: inline-block;
+        color: $accent-color;
+        cursor: pointer;
+        position: relative;
+        &:after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 0.5px;
+            background-color: $accent-border-color;
+            transform: scaleY(0.5);
+        }
+    }
+}
+.text-light {
+    color: $text-color-transparent;
+}
+// --- / Базовые стили ---
 
 // --- Стили элементов ---
-// --- реакции ---
 .reaction {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: $background-color-light;
-    padding: 8px 12px;
+    padding: 7px 11px;
     font-size: 14px;
     &_left {
         border-radius: 20px 0 0 20px;
@@ -44,3 +65,4 @@
         margin-right: 6px;
     }
 }
+// --- / Стили элементов ---

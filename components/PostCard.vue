@@ -30,10 +30,10 @@ const { post, isOpenPostNeeded = true } = defineProps<Props>()
                     <span class="reaction__value">{{ post.reactions.dislikes }}</span>
                 </div>
             </div>
-            <div v-if="isOpenPostNeeded" class="post-card__open">
+            <div v-if="isOpenPostNeeded" class="post-card__open accent-link">
                 <NuxtLink :to="`/posts/${post.id}`">Open post</NuxtLink>
             </div>
-            <div class="post-card__date">Today</div>
+            <div class="post-card__date text-light">Today</div>
             <div class="post-card__tags">
                 <PostTag
                     v-for="(tag, i) in post.tags"
@@ -78,26 +78,6 @@ const { post, isOpenPostNeeded = true } = defineProps<Props>()
     }
     &__comments {
         cursor: pointer;
-    }
-    &__open {
-        a {
-            color: $accent-color;
-            cursor: pointer;
-            position: relative;
-            &:after {
-                content: "";
-                position: absolute;
-                bottom: -1px;
-                left: 0;
-                width: 100%;
-                height: 0.5px;
-                background-color: $accent-border-color;
-                transform: scaleY(0.5);
-            }
-        }
-    }
-    &__date {
-        color: $text-color-transparent;
     }
     &__tags {
         display: flex;
