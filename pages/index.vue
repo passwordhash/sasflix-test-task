@@ -2,19 +2,18 @@
 import {useFetch} from "#app/composables/fetch";
 import type {GetPostsResp} from "~/types/Posts";
 
+// Собираем URL для запроса
 const uri = useRuntimeConfig().public.apiBaseUrl + '/posts';
 
+// TODO: add error handling
+// Получаем данные типа GetPostsResp
 const { data: resp } = await useFetch<GetPostsResp>(uri)
 </script>
 
 <template>
-    <div>
+    <div class="main__container container">
         <div v-if="resp" v-for="p in resp.posts">
             <PostCard :post="p"/>
         </div>
     </div>
 </template>
-
-<style scoped>
-
-</style>

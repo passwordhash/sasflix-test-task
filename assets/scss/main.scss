@@ -1,4 +1,51 @@
+@import "variables";
+
 * {
     font-family: "SF Pro Display", "Arial", sans-serif;
     font-weight: 400;
+}
+
+// --- Базовые стили ---
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+// --- Стили элементов ---
+// --- реакции ---
+.reaction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $background-color-light;
+    padding: 8px 12px;
+    font-size: 14px;
+    &_left {
+        border-radius: 20px 0 0 20px;
+    }
+    &_right {
+        border-radius: 0 20px 20px 0;
+        img {
+            height: 13px;
+        }
+    }
+    &__value {
+        font-size: 14px;
+        color: $text-color-light;
+    }
+    &__icon {
+        margin-right: 4px;
+        &_dislike img {
+            display: none;
+        }
+    }
+    &__react {
+        margin-right: 6px;
+    }
+}
+// --- теги ---
+.tags {
+    display: flex;
+    align-items: center;
 }

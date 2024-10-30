@@ -1,12 +1,12 @@
 <template>
-    <body>
     <header class="header">
-        <h1 class="header__title">ikakprosto.ru</h1>
+        <NuxtLink to="/">
+            <h1 class="header__title">ikakprosto.ru</h1>
+        </NuxtLink>
     </header>
     <main>
         <slot />
     </main>
-    </body>
 </template>
 
 <style  lang="scss">
@@ -14,6 +14,8 @@
 
 .header {
     text-align: center;
+    margin-top: 16px;
+    margin-bottom: 48px;
     &__title {
         color: $accent-color;
         font-weight: bold;
@@ -21,3 +23,5 @@
     }
 }
 </style>
+<script setup lang="ts">
+</script>
