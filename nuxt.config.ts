@@ -1,4 +1,10 @@
 export default defineNuxtConfig({
+  app: {
+      head: {
+          title: "Sasflix",
+      }
+  },
+
   devtools: { enabled: true },
 
   css: [
@@ -8,17 +14,12 @@ export default defineNuxtConfig({
       "~/assets/scss/main.scss",
   ],
 
-  app: {
-      head: {
-          title: "Sasflix",
-      }
-  },
-
+  // modules: ["@pinia/nuxt"],
   runtimeConfig: {
       public: {
           apiBaseUrl: process.env.API_BASE_URL || "https://dummyjson.com"
       }
   },
 
-  modules: ["@nuxt/image"]
+  modules: ["@pinia/nuxt"],
 })

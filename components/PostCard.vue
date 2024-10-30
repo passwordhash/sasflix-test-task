@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type {Post} from "~/types/Posts";
 import PostTag from "~/components/PostTag.vue";
-import {tr} from "cronstrue/dist/i18n/locales/tr";
 
 // Определяем типы пропсов
 interface Props {
