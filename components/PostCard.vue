@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type {Post} from "~/types/Posts";
+import PostTag from "~/components/PostTag.vue";
 
 // Получаем данные из родительского компонента типа Post
 const { post } = defineProps<{post: Post}>()
@@ -25,10 +26,12 @@ const { post } = defineProps<{post: Post}>()
             </div>
             <div class="post-card__open">Open comments</div>
             <div class="post-card__date">Today</div>
-            <div class="post-card__tags tags">
-                <div class="tag__item">history</div>
-                <div class="tag__item">american</div>
-                <div class="tag__item">crime</div>
+            <div class="post-card__tags">
+                <PostTag
+                    v-for="(tag, i) in post.tags"
+                    :key="tag"
+                    :is-first="i === 0"
+                    :tag="tag"  />
             </div>
         </div>
     </div>
@@ -85,6 +88,13 @@ const { post } = defineProps<{post: Post}>()
     }
     &__date {
         color: $text-color-transparent;
+    }
+    &__tags {
+        display: flex;
+        align-items: center;
+        & > * {
+            margin-right: 4px;
+        }
     }
 }
 </style>

@@ -7,7 +7,7 @@
 
 // --- Базовые стили ---
 .container {
-    max-width: 700px;
+    max-width: 640px;
     margin: 0 auto;
     padding: 0 15px;
 }
@@ -43,9 +43,4 @@
     &__react {
         margin-right: 6px;
     }
-}
-// --- теги ---
-.tags {
-    display: flex;
-    align-items: center;
 }
