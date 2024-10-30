@@ -4,7 +4,7 @@
             <h1 class="header__title">ikakprosto.ru</h1>
         </NuxtLink>
     </header>
-    <main>
+    <main class="main__container container">
         <slot />
     </main>
 </template>

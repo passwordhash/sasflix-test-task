@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import type {Post} from "~/types/Posts";
 import PostTag from "~/components/PostTag.vue";
+import {tr} from "cronstrue/dist/i18n/locales/tr";
 
-// Получаем данные из родительского компонента типа Post
-const { post } = defineProps<{post: Post}>()
+// Определяем типы пропсов
+interface Props {
+    post: Post
+    isOpenPostNeeded?: boolean
+}
+// Получаем пропсы из родительского компонента
+const { post, isOpenPostNeeded = true } = defineProps<Props>()
 
 </script>
 
@@ -24,7 +30,7 @@ const { post } = defineProps<{post: Post}>()
                     <span class="reaction__value">{{ post.reactions.dislikes }}</span>
                 </div>
             </div>
-            <div class="post-card__open">
+            <div v-if="isOpenPostNeeded" class="post-card__open">
                 <NuxtLink :to="`/posts/${post.id}`">Open post</NuxtLink>
             </div>
             <div class="post-card__date">Today</div>

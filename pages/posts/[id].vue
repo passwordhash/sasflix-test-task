@@ -23,15 +23,16 @@ definePageMeta({
 </script>
 
 <template>
-    <div>
-        <div>
-            <h1>{{ post?.title }}</h1>
-            <p>{{ post?.body }}</p>
+    <div class="post-page__wrapper">
+        <div class="post-page__post">
+            <PostCard v-if="post" :post="post" :is-open-post-needed="false"/>
+            <!--        TODO:-->
+            <h2 v-else>
+                Не удалось загрузить пост
+            </h2>
         </div>
-        <div>
-            <h2>Комментарии</h2>
-            <div v-for="comment in commentsData?.comments">
-                <p>{{ comment.body }}</p>
+        <div class="post-page__comments">
+            <div>
             </div>
         </div>
     </div>
