@@ -1,10 +1,10 @@
-import type {Post, PostsResp} from "~/types/Posts";
+import {type Post, type PostsResp, Reaction} from "~/types/Posts"
 
 export const usePostsStore = defineStore("posts", {
     state: () => ({
         posts: [] as Post[] | [],
         isLoading: false,
-        error: null as string | null
+        error: null as string | null,
     }),
     actions: {
         async fetchPost(url: string) {
@@ -49,6 +49,19 @@ export const usePostsStore = defineStore("posts", {
         },
         setError(error: string | null) {
             this.error = error
+        },
+        reactPost(postId: number, reaction: Reaction) {
+            const post = this.posts.find(post => post.id === postId)
+            if (!post) return
+
+            switch (reaction) {
+                case Reaction.like:
+                    post.reacted = Reaction.like
+                    break
+                case Reaction.dislike:
+                    post.reacted = Reaction.dislike
+                    break
+            }
         }
     }
 })

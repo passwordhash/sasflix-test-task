@@ -1,3 +1,12 @@
+
+export enum Reaction {
+    none,
+    like,
+    dislike
+}
+
+// export type Reaction = "liked" | "disliked"
+
 export type Post = {
     id: number
     title: string
@@ -10,6 +19,8 @@ export type Post = {
     views: number
     userId: number
 
+    // Реакция пользователя на пост. Локальное состояние.
+    reacted: Reaction
 }
 
 export type Comment = {

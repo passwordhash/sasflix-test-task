@@ -1,16 +1,21 @@
 <script setup lang="ts">
-import type {Post} from "~/types/Posts";
+import {type Post, Reaction} from "~/types/Posts";
 import PostTag from "~/components/PostTag.vue";
 import LikeIcon from "~/components/icons/LikeIcon.vue"
 import DislikeIcon from "~/components/icons/DislikeIcon.vue"
+
 
 // Определяем типы пропсов
 interface Props {
     post: Post
     isOpenPostNeeded?: boolean
+    reacted: Reaction
 }
 // Получаем пропсы из родительского компонента
-const { post, isOpenPostNeeded = true } = defineProps<Props>()
+const { post, isOpenPostNeeded = true, reacted = Reaction.none } = defineProps<Props>()
+
+console.log("reacted:" ,reacted)
+
 </script>
 
 <template>
@@ -19,13 +24,23 @@ const { post, isOpenPostNeeded = true } = defineProps<Props>()
         <div class="post-card__body">{{ post.body }}</div>
         <div class="post-card__footer">
             <div class="post-card__reactions">
-                <div class="post-card__likes reaction reaction__like active">
-                    <LikeIcon :is-light="true" class="reaction__icon" />
+                <div
+                    class="post-card__likes reaction reaction__like"
+                    :class="{ 'active': reacted === Reaction.like }"
+                    @click="$emit('react', post.id, Reaction.like)">
+                    <LikeIcon
+                        class="reaction__icon"
+                        :is-light="reacted === Reaction.like" />
                     <span class="reaction__react">Like</span>
                     <span class="reaction__value">{{ post.reactions?.likes }}</span>
                 </div>
-                <div class="post-card__comments reaction reaction__dislike active">
-                    <DislikeIcon :is-light="true" class="reaction__icon" />
+                <div
+                    class="post-card__comments reaction reaction__dislike"
+                    :class="{ 'active': reacted === Reaction.dislike }"
+                    @click="$emit('react', post.id, Reaction.dislike)">
+                    <DislikeIcon
+                        class="reaction__icon"
+                        :is-light="reacted === Reaction.dislike" />
                     <span class="reaction__react">Trash</span>
                     <span class="reaction__value">{{ post.reactions?.dislikes }}</span>
                 </div>

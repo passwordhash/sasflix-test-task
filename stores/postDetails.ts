@@ -1,4 +1,5 @@
 import type {CommentsResp, Post, Comment, PostResp} from "~/types/Posts";
+import {Reaction} from "~/types/Posts"
 
 export const usePostDetailsStore = defineStore("postDetail", {
     state: () => ({
@@ -49,6 +50,18 @@ export const usePostDetailsStore = defineStore("postDetail", {
         },
         setError(error: string | null) {
             this.error = error
+        },
+        reactPost(reaction: Reaction) {
+            if (!this.post) return
+
+            switch (reaction) {
+                case Reaction.like:
+                    this.post.reacted = Reaction.like
+                    break
+                case Reaction.dislike:
+                    this.post.reacted = Reaction.dislike
+                    break
+            }
         }
     }
 })

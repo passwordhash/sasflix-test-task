@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import {useAsyncData} from "#app";
 import {usePostDetailsStore} from "~/stores/postDetails";
+import type {Reaction} from "~/types/Posts"
+import {usePostsStore} from "~/stores/posts"
+
+// Устанавливаем мета-теги для страницы
+useHead({
+    title: "Sasflix | Страница поста",
+    meta: [
+        { name: "description", content: "Пост с подробной информацией" }
+    ]
+})
 
 // Имитация удаления комментария
 const  deletedComments = ref<number[]>([])
@@ -15,18 +25,12 @@ const baseUri = useRuntimeConfig().public.apiBaseUrl
 const postUri = `${baseUri}/posts/${postId}`
 const commentsUri = `${baseUri}/posts/${postId}/comments`
 
-// Получаем стор
+// Получаем сторы
 const store = usePostDetailsStore()
 
 // Получаем пост и комментарии
 await useAsyncData("post", () => store.fetchPost(postUri).then(() => true))
 await useAsyncData("comments", () => store.fetchComments(commentsUri).then(() => true))
-
-// Устанавливаем мета-теги для страницы
-definePageMeta({
-    title: "Sasflix | Страница поста",
-    description: "Пост с поxдробной информацией"
-})
 
 const removeComment = (commentId: number) => {
     if (!deletedComments.value.includes(commentId)) {
@@ -40,6 +44,10 @@ const returnComment = (commentId: number) => {
         deletedComments.value.splice(index, 1)
     }
 }
+
+const reactPost = (id: number, reaction: Reaction) => {
+    store.reactPost(reaction)
+}
 </script>
 
 <template>
@@ -47,14 +55,20 @@ const returnComment = (commentId: number) => {
         <div  class="post-page__wrapper">
             <!-- Пост -->
             <div  class="post-page__post">
-                <PostCard v-if="store.post" :post="store.post" :is-open-post-needed="false"/>
+                <PostCard
+                    v-if="store.post"
+                    :post="store.post"
+                    :is-open-post-needed="false"
+                    :reacted="store.post.reacted"
+                    @react="reactPost"
+                />
                 <div v-else>
                     <h2 class="alert-msg">Failed to load post</h2>
                 </div>
             </div>
             <!-- Комментарии -->
             <div class="post-page__comments">
-                <div  v-if="store.comments" class="post-comments">
+                <div v-if="store.comments" class="post-comments">
                     <h2 class="post-comments__header">{{ store.comments.length }} comments</h2>
                     <p  class="post-comments__wrapper">
                         <PostComment
