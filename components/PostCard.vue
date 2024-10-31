@@ -19,13 +19,13 @@ const { post, isOpenPostNeeded = true } = defineProps<Props>()
         <div class="post-card__body">{{ post.body }}</div>
         <div class="post-card__footer">
             <div class="post-card__reactions">
-                <div class="post-card__likes reaction reaction_left">
-                    <LikeIcon class="reaction__icon" />
+                <div class="post-card__likes reaction reaction__like active">
+                    <LikeIcon :is-light="true" class="reaction__icon" />
                     <span class="reaction__react">Like</span>
                     <span class="reaction__value">{{ post.reactions?.likes }}</span>
                 </div>
-                <div class="post-card__comments reaction reaction_right">
-                    <DislikeIcon class="reaction__icon" />
+                <div class="post-card__comments reaction reaction__dislike active">
+                    <DislikeIcon :is-light="true" class="reaction__icon" />
                     <span class="reaction__react">Trash</span>
                     <span class="reaction__value">{{ post.reactions?.dislikes }}</span>
                 </div>
