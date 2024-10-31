@@ -1,3 +1,6 @@
+/*
+    Типы данных для постов.
+ */
 
 export enum Reaction {
     none,

@@ -29,7 +29,6 @@ const { isFirst, tag } = defineProps<{
         padding: 1px 4px;
         background-color: $background-color-transparent;
     }
-
 }
 .post-tag_first {
     div {
