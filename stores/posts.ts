@@ -7,7 +7,7 @@ export const usePostsStore = defineStore("posts", {
         error: null as string | null
     }),
     actions: {
-       async fetchPost(url: string) {
+        async fetchPost(url: string) {
             this.setError(null)
             this.setLoading(true)
             try {
@@ -44,7 +44,7 @@ export const usePostsStore = defineStore("posts", {
         setPosts(posts: Post[]) {
             this.posts = posts.map(post => structuredClone(post))
         },
-       setLoading(loading: boolean) {
+        setLoading(loading: boolean) {
             this.isLoading = loading
         },
         setError(error: string | null) {

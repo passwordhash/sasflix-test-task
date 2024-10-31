@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type {Post} from "~/types/Posts";
 import PostTag from "~/components/PostTag.vue";
+import LikeIcon from "~/components/icons/LikeIcon.vue"
+import DislikeIcon from "~/components/icons/DislikeIcon.vue"
 
 // Определяем типы пропсов
 interface Props {
@@ -17,13 +19,13 @@ const { post, isOpenPostNeeded = true } = defineProps<Props>()
         <div class="post-card__body">{{ post.body }}</div>
         <div class="post-card__footer">
             <div class="post-card__reactions">
-                <div class="post-card__likes reaction reaction_left reaction_active">
-                    <img class="reaction__icon" src="/images/icon_like.svg" alt="like" />
+                <div class="post-card__likes reaction reaction_left">
+                    <LikeIcon class="reaction__icon" />
                     <span class="reaction__react">Like</span>
                     <span class="reaction__value">{{ post.reactions?.likes }}</span>
                 </div>
                 <div class="post-card__comments reaction reaction_right">
-                    <img class="reaction__icon" src="/images/icon_trash.svg" alt="comment" />
+                    <DislikeIcon class="reaction__icon" />
                     <span class="reaction__react">Trash</span>
                     <span class="reaction__value">{{ post.reactions?.dislikes }}</span>
                 </div>

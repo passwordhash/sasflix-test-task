@@ -1,4 +1,4 @@
-import type {CommentsResp, Post, Comment, PostsResp, PostResp} from "~/types/Posts";
+import type {CommentsResp, Post, Comment, PostResp} from "~/types/Posts";
 
 export const usePostDetailsStore = defineStore("postDetail", {
     state: () => ({
