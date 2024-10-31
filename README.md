@@ -18,4 +18,4 @@ API · Список постов брать отсюда
 
 - `dummyjson.com/posts/${id_post}/comments`
 API · Отдельный пост с комментариями
-- [Макет в Фигме](https://www.figma.com/design/mHrFr0RC8pJ1pzRcXp95Oy/sasflix-interview-template?m=auto&t=XsZbseKUkpkm4NBS-1)
+- [Макет в Фигме](https://www.figma.com/design/FsK4iDHoGGstdfe9QzVZAP/sasflix-interview-template?node-id=0-1&t=7U6nJMUDlljtJLjU-1)
