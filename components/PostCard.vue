@@ -10,6 +10,7 @@ interface Props {
     isOpenPostNeeded?: boolean
     reacted: Reaction
 }
+
 // Получаем пропсы из родительского компонента
 const { post, isOpenPostNeeded = true, reacted = Reaction.none } = defineProps<Props>()
 </script>

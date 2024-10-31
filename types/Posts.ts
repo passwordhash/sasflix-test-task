@@ -5,8 +5,6 @@ export enum Reaction {
     dislike
 }
 
-// export type Reaction = "liked" | "disliked"
-
 export type Post = {
     id: number
     title: string
