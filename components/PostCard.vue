@@ -9,7 +9,6 @@ interface Props {
 }
 // Получаем пропсы из родительского компонента
 const { post, isOpenPostNeeded = true } = defineProps<Props>()
-
 </script>
 
 <template>
@@ -21,12 +20,12 @@ const { post, isOpenPostNeeded = true } = defineProps<Props>()
                 <div class="post-card__likes reaction reaction_left reaction_active">
                     <img class="reaction__icon" src="/images/icon_like.svg" alt="like" />
                     <span class="reaction__react">Like</span>
-                    <span class="reaction__value">{{ post.reactions.likes }}</span>
+                    <span class="reaction__value">{{ post.reactions?.likes }}</span>
                 </div>
                 <div class="post-card__comments reaction reaction_right">
                     <img class="reaction__icon" src="/images/icon_trash.svg" alt="comment" />
                     <span class="reaction__react">Trash</span>
-                    <span class="reaction__value">{{ post.reactions.dislikes }}</span>
+                    <span class="reaction__value">{{ post.reactions?.dislikes }}</span>
                 </div>
             </div>
             <div v-if="isOpenPostNeeded" class="post-card__open accent-link">

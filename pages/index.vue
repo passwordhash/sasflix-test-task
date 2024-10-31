@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {usePostsStore} from "~/stores/post";
+import {usePostsStore} from "~/stores/posts";
 import {useAsyncData} from "#app";
 
 // Собираем URL для запроса

@@ -2,11 +2,28 @@ import type {Post, PostsResp} from "~/types/Posts";
 
 export const usePostsStore = defineStore("posts", {
     state: () => ({
-        posts: [] as Post[],
+        posts: [] as Post[] | [],
         isLoading: false,
         error: null as string | null
     }),
     actions: {
+       async fetchPost(url: string) {
+            this.setError(null)
+            this.setLoading(true)
+            try {
+                const response = await fetch(url)
+                if (!response.ok) {
+                    throw new Error("failed to fetch post")
+                }
+
+                const data: Post = await response.json()
+                this.setPosts([data])
+            } catch (e: any) {
+                this.setError(e.message)
+            } finally {
+                this.setLoading(false)
+            }
+        },
         async fetchPosts(url: string) {
             this.setError(null)
             this.setLoading(true)
