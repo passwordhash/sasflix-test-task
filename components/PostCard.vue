@@ -4,7 +4,6 @@ import PostTag from "~/components/PostTag.vue";
 import LikeIcon from "~/components/icons/LikeIcon.vue"
 import DislikeIcon from "~/components/icons/DislikeIcon.vue"
 
-
 // Определяем типы пропсов
 interface Props {
     post: Post
@@ -13,9 +12,6 @@ interface Props {
 }
 // Получаем пропсы из родительского компонента
 const { post, isOpenPostNeeded = true, reacted = Reaction.none } = defineProps<Props>()
-
-console.log("reacted:" ,reacted)
-
 </script>
 
 <template>
@@ -27,7 +23,7 @@ console.log("reacted:" ,reacted)
                 <div
                     class="post-card__likes reaction reaction__like"
                     :class="{ 'active': reacted === Reaction.like }"
-                    @click="$emit('react', post.id, Reaction.like)">
+                    @click="$emit('react', Reaction.like)">
                     <LikeIcon
                         class="reaction__icon"
                         :is-light="reacted === Reaction.like" />
@@ -37,7 +33,7 @@ console.log("reacted:" ,reacted)
                 <div
                     class="post-card__comments reaction reaction__dislike"
                     :class="{ 'active': reacted === Reaction.dislike }"
-                    @click="$emit('react', post.id, Reaction.dislike)">
+                    @click="$emit('react', Reaction.dislike)">
                     <DislikeIcon
                         class="reaction__icon"
                         :is-light="reacted === Reaction.dislike" />

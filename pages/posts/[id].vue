@@ -45,7 +45,7 @@ const returnComment = (commentId: number) => {
     }
 }
 
-const reactPost = (id: number, reaction: Reaction) => {
+const reactPost = (reaction: Reaction) => {
     store.reactPost(reaction)
 }
 </script>

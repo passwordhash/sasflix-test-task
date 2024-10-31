@@ -1,5 +1,6 @@
 import type {CommentsResp, Post, Comment, PostResp} from "~/types/Posts";
 import {Reaction} from "~/types/Posts"
+import {sw} from "cronstrue/dist/i18n/locales/sw"
 
 export const usePostDetailsStore = defineStore("postDetail", {
     state: () => ({
@@ -54,14 +55,42 @@ export const usePostDetailsStore = defineStore("postDetail", {
         reactPost(reaction: Reaction) {
             if (!this.post) return
 
+            const prevReaction = this.post.reacted
+            // Если пользователь нажал на ту же реакцию, что и раньше, то отменяем ее
+            if (prevReaction === reaction) {
+                this.undoReaction()
+                return
+            }
+
             switch (reaction) {
                 case Reaction.like:
+                    this.post.reactions.likes += 1
+                    // Если пользователь изменил свою реакцию, то уменьшаем количество предыдущей реакции
+                    this.post.reactions.dislikes -= prevReaction === Reaction.dislike ? 1 : 0
                     this.post.reacted = Reaction.like
                     break
                 case Reaction.dislike:
+                    this.post.reactions.dislikes += 1
+                    // Если пользователь изменил свою реакцию, то уменьшаем количество предыдущей реакции
+                    this.post.reactions.likes -= prevReaction === Reaction.like ? 1 : 0
                     this.post.reacted = Reaction.dislike
                     break
             }
+        },
+        undoReaction() {
+            if (!this.post) return
+
+            const currReact = this.post.reacted
+            switch (currReact) {
+                case Reaction.like:
+                    this.post.reactions.likes -= 1
+                    break
+                case Reaction.dislike:
+                    this.post.reactions.dislikes -= 1
+                    break
+            }
+
+            this.post.reacted = Reaction.none
         }
-    }
+    },
 })

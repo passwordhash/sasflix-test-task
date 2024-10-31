@@ -51,8 +51,16 @@ export const usePostsStore = defineStore("posts", {
             this.error = error
         },
         reactPost(postId: number, reaction: Reaction) {
+            // Находим пост по id
             const post = this.posts.find(post => post.id === postId)
+
             if (!post) return
+
+            const prevReaction = post.reacted
+            // Если пользователь уже поставил реакцию, то убираем ее
+            if (prevReaction === reaction) {
+                return
+            }
 
             switch (reaction) {
                 case Reaction.like:
@@ -62,6 +70,13 @@ export const usePostsStore = defineStore("posts", {
                     post.reacted = Reaction.dislike
                     break
             }
+        },
+        undoReaction(postId: number) {
+            const post = this.posts.find(post => post.id === postId)
+
+            if (!post) return
+
+            post.reacted = null
         }
     }
 })
