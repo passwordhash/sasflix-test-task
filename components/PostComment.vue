@@ -9,7 +9,6 @@ const { comment, isDeleted = false } = defineProps<{
     comment: Comment,
     isDeleted?: boolean
 }>()
-
 </script>
 
 <template>

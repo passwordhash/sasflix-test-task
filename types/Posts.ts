@@ -1,11 +1,12 @@
+/*
+    Типы данных для постов.
+ */
 
 export enum Reaction {
     none,
     like,
     dislike
 }
-
-// export type Reaction = "liked" | "disliked"
 
 export type Post = {
     id: number

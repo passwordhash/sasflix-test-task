@@ -12,6 +12,7 @@ const store = usePostsStore()
 // Получаем данные
 await useAsyncData("posts", () => store.fetchPosts(postsUri).then(() => true))
 
+// Handler для реакции на пост
 const reactPost = (id: number, reaction: Reaction) => {
     store.reactPost(id, reaction)
 }
