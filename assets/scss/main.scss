@@ -12,6 +12,7 @@
     padding: 0 15px;
 }
 .accent-link {
+    user-select: none;
     &, a {
         display: inline-block;
         color: $accent-color;

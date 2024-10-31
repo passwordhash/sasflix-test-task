@@ -4,6 +4,7 @@ export const usePostsStore = defineStore("posts", {
     state: () => ({
         _posts: [] as Post[] | [],
         comments: null as Comment[] | null,
+        deletedCommentIds: [] as number[],
         isLoading: false,
         error: null as string | null,
     }),
@@ -113,6 +114,17 @@ export const usePostsStore = defineStore("posts", {
             }
 
             post.reacted = Reaction.none
+        },
+        removeComment(commentId: number) {
+            if (!this.deletedCommentIds.includes(commentId)) {
+                this.deletedCommentIds.push(commentId)
+            }
+        },
+        returnComment(commentId: number) {
+            const index = this.deletedCommentIds.indexOf(commentId)
+            if (index !== -1) {
+                this.deletedCommentIds.splice(index, 1)
+            }
         }
     },
 })

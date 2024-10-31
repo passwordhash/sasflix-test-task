@@ -26,7 +26,7 @@ const { comment, isDeleted = false } = defineProps<{
                     <span @click="$emit('returnComment', comment.id)" class="comment__return accent-link">Return</span>
                 </span>
             </div>
-            <div class="comment__additionals">
+            <div v-if="!isDeleted" class="comment__additionals">
                 <span class="comment__date text-light">Today</span>
                 <span @click="$emit('removeComment', comment.id)" class="comment__delete accent-link">Delete</span>
             </div>

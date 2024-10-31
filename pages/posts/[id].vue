@@ -36,19 +36,6 @@ const { data: post } = useAsyncData('posts', async () => {
 })
 await useAsyncData("comments", () => store.fetchComments(commentsUri).then(() => true))
 
-const removeComment = (commentId: number) => {
-    if (!deletedComments.value.includes(commentId)) {
-        deletedComments.value.push(commentId)
-    }
-}
-
-const returnComment = (commentId: number) => {
-    const index = deletedComments.value.indexOf(commentId)
-    if (index !== -1) {
-        deletedComments.value.splice(index, 1)
-    }
-}
-
 const reactPost = (postId: number, reaction: Reaction) => {
     store.reactPost(postId, reaction)
 }
@@ -79,9 +66,9 @@ const reactPost = (postId: number, reaction: Reaction) => {
                             v-for="comment in store.comments"
                             :key="comment.id"
                             :comment="comment"
-                            @removeComment="removeComment"
-                            @returnComment="returnComment"
-                            :is-deleted="deletedComments.includes(comment.id)"
+                            @removeComment="() => store.removeComment(comment.id)"
+                            @returnComment="() => store.returnComment(comment.id)"
+                            :is-deleted="store.deletedCommentIds.includes(comment.id)"
                         />
                     </p>
                 </div>
