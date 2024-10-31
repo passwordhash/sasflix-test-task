@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {useAsyncData} from "#app";
-import {usePostDetailsStore} from "~/stores/postDetails";
 import type {Reaction} from "~/types/Posts"
 import {usePostsStore} from "~/stores/posts"
 
@@ -16,20 +15,25 @@ useHead({
 const  deletedComments = ref<number[]>([])
 
 // Получаем id поста из роута
-const { id: postId } = useRoute().params
+const {id : postIdParam} = useRoute().params
+const postId = Number(postIdParam)
 
 // Получаем базовый uri из конфига
 const baseUri = useRuntimeConfig().public.apiBaseUrl
 
 // Формируем uri для запроса поста и комментариев
-const postUri = `${baseUri}/posts/${postId}`
-const commentsUri = `${baseUri}/posts/${postId}/comments`
+const postUri = `${baseUri}/posts/${postIdParam}`
+const commentsUri = `${baseUri}/posts/${postIdParam}/comments`
 
 // Получаем сторы
-const store = usePostDetailsStore()
+const store = usePostsStore()
 
 // Получаем пост и комментарии
-await useAsyncData("post", () => store.fetchPost(postUri).then(() => true))
+// await useAsyncData("post", () => store.fetchPost(postUri).then(() => true))
+const { data: post } = useAsyncData('posts', async () => {
+  await store.fetchPost(postUri)
+  return store.getPostById(postId)
+})
 await useAsyncData("comments", () => store.fetchComments(commentsUri).then(() => true))
 
 const removeComment = (commentId: number) => {
@@ -45,8 +49,8 @@ const returnComment = (commentId: number) => {
     }
 }
 
-const reactPost = (reaction: Reaction) => {
-    store.reactPost(reaction)
+const reactPost = (postId: number, reaction: Reaction) => {
+    store.reactPost(postId, reaction)
 }
 </script>
 
@@ -56,10 +60,10 @@ const reactPost = (reaction: Reaction) => {
             <!-- Пост -->
             <div  class="post-page__post">
                 <PostCard
-                    v-if="store.post"
-                    :post="store.post"
+                    v-if="post"
+                    :post="post"
                     :is-open-post-needed="false"
-                    :reacted="store.post.reacted"
+                    :reacted="post.reacted"
                     @react="reactPost"
                 />
                 <div v-else>

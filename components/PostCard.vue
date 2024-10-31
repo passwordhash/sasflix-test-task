@@ -23,7 +23,7 @@ const { post, isOpenPostNeeded = true, reacted = Reaction.none } = defineProps<P
                 <div
                     class="post-card__likes reaction reaction__like"
                     :class="{ 'active': reacted === Reaction.like }"
-                    @click="$emit('react', Reaction.like)">
+                    @click="$emit('react', post.id, Reaction.like)">
                     <LikeIcon
                         class="reaction__icon"
                         :is-light="reacted === Reaction.like" />
@@ -33,7 +33,7 @@ const { post, isOpenPostNeeded = true, reacted = Reaction.none } = defineProps<P
                 <div
                     class="post-card__comments reaction reaction__dislike"
                     :class="{ 'active': reacted === Reaction.dislike }"
-                    @click="$emit('react', Reaction.dislike)">
+                    @click="$emit('react', post.id, Reaction.dislike)">
                     <DislikeIcon
                         class="reaction__icon"
                         :is-light="reacted === Reaction.dislike" />

@@ -19,7 +19,7 @@ const reactPost = (id: number, reaction: Reaction) => {
 
 <template>
     <div class="main__container container">
-        <div v-for="p in store.posts.slice(0, 5)">
+        <div v-for="p in store.getPosts.slice(0, 5)">
             <PostCard @react="reactPost"  :reacted="p.reacted" :post="p"/>
         </div>
         <h3 class="alert-msg" v-if="store.error">Error loading posts</h3>
