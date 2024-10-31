@@ -65,4 +65,12 @@
         margin-right: 6px;
     }
 }
+.alert-msg {
+    background: $accent-border-color;
+    color: $text-color-transparent;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
 // --- / Стили элементов ---

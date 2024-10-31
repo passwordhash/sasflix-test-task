@@ -1,19 +1,24 @@
 <script setup lang="ts">
-import {useFetch} from "#app/composables/fetch";
-import type {PostsResp} from "~/types/Posts";
+import {usePostsStore} from "~/stores/post";
+import {useAsyncData} from "#app";
 
 // Собираем URL для запроса
-const uri = useRuntimeConfig().public.apiBaseUrl + '/posts';
+const postsUri = useRuntimeConfig().public.apiBaseUrl + '/posts';
 
-// TODO: add error handling
-// Получаем данные типа GetPostsResp
-const { data: resp } = await useFetch<PostsResp>(uri)
+// Инициализируем хранилище
+const store = usePostsStore()
+
+// Получаем данные
+await useAsyncData("posts", () => store.fetchPosts(postsUri).then(() => true))
 </script>
 
 <template>
     <div class="main__container container">
-        <div v-for="p in resp?.posts.slice(0, 5)">
+        <div v-for="p in store.posts.slice(0, 5)">
             <PostCard :post="p"/>
         </div>
+        <h3 class="alert-msg" v-if="store.error">Error loading posts</h3>
+        <!-- Не имеет особого смысла при ssr -->
+        <h3 class="alert-msg" v-if="store.isLoading">Loading posts ...</h3>
     </div>
 </template>
