@@ -25,16 +25,18 @@ const baseUri = useRuntimeConfig().public.apiBaseUrl
 const postUri = `${baseUri}/posts/${postIdParam}`
 const commentsUri = `${baseUri}/posts/${postIdParam}/comments`
 
-// Получаем сторы
+// Получаем стор
 const store = usePostsStore()
 
 // Получаем пост и комментарии
-// await useAsyncData("post", () => store.fetchPost(postUri).then(() => true))
 const { data: post } = useAsyncData('posts', async () => {
-  await store.fetchPost(postUri)
-  return store.getPostById(postId)
+    await store.fetchPost(postUri)
+    return store.getPostById(postId)
 })
-await useAsyncData("comments", () => store.fetchComments(commentsUri).then(() => true))
+const { data: comments } = useAsyncData('comments', async () => {
+    await store.fetchComments(commentsUri)
+    return store.comments
+})
 
 const reactPost = (postId: number, reaction: Reaction) => {
     store.reactPost(postId, reaction)
@@ -63,7 +65,7 @@ const reactPost = (postId: number, reaction: Reaction) => {
                     <h2 class="post-comments__header">{{ store.comments.length }} comments</h2>
                     <p  class="post-comments__wrapper">
                         <PostComment
-                            v-for="comment in store.comments"
+                            v-for="comment in comments"
                             :key="comment.id"
                             :comment="comment"
                             @removeComment="() => store.removeComment(comment.id)"
