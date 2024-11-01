@@ -38,6 +38,10 @@
    ```bash
    cd sasflix-test-task
    ```
+3. Создайте файл `.env` на основе `.env.example`:
+   ```bash
+   cp .env.example .env
+   ```
 3. Постройте и запустите контейнер с помощью Makefile:
    ```bash
    make start
